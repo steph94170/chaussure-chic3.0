@@ -1,0 +1,10 @@
+html, .et-visitor-body
+{
+    height: 100%;
+}
+
+
+.et-visitor-body{
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}

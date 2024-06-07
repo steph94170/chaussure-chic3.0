@@ -1,0 +1,79 @@
+{% extends 'themes/base_admin.html.twig' %}
+
+{% block title %} Nouveaux produits {% endblock %}
+
+{% block description %} nouveaux produits {% endblock %}
+
+
+{% block main %}
+        <h1 class="text-center display-5 my-3">Ajouter un produit</h1>
+
+        <div class="container my-5 ">
+            <div class="row">
+                <div class="col-md-10 col-lg-6 ">
+                    {{ form_start(form) }}
+                    <div class="mb-3">
+                        <label for="product_form_name">Nom <span class="text-danger">*</span></label>
+                        <div class="text-danger">{{ form_errors(form.name) }}</div>
+                        {{ form_widget(form.name, {'attr': {'class': 'form-control'}})}}
+                    </div>
+                    <div class="mb-3">
+                        <label for="product_form_code">Code <span class="text-danger">*</span></label>
+                        <div class="text-danger">{{ form_errors(form.code) }}</div>
+                        {{ form_widget(form.code, {'attr': {'class': 'form-control'}})}}
+                    </div>
+                    <div class="mb-3">
+                        <label for="product_form_brand">Marque</label>
+                        <div class="text-danger">{{ form_errors(form.brand) }}</div>
+                        {{ form_widget(form.brand, {'attr': {'class': 'form-control'}})}}
+                    </div>
+                    <div class="input-group mb-3">
+                        <label for="product_form_sellingPrice">Prix de vente <span class="text-danger">*</span>
+                        <div class="text-danger">{{ form_errors(form.sellingPrice) }}</div>
+                        </label>
+                            <div class="input-group ">
+                                {{ form_widget(form.sellingPrice, {'attr': {'class': 'form-control'}})}}
+                                <span class="input-group-text">€</span>
+                            </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="product_form_quantity">Stock disponible<span class="text-danger">*</span></label>
+                        <div class="text-danger">{{ form_errors(form.quantity) }}</div>
+                        {{ form_widget(form.quantity, {'attr': {'class': 'form-control'}})}}
+                    </div>
+                    <div class="mb-3">
+                        <label for="product_form_category">Catégories<span class="text-danger">*</span></label>
+                        <div class="text-danger">{{ form_errors(form.category) }}</div>
+                        {{ form_widget(form.category, {'attr': {'class': 'form-control'}})}}
+                    </div>
+                     </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            {{ form_widget(form.isNewArrival) }}
+                            <div class="text-danger">{{ form_errors(form.isNewArrival) }}</div>
+                            <label for="product_form_isNewArrival">Nouvel arrivage</label>
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_widget(form.isBetterSeller) }}
+                            <div class="text-danger">{{ form_errors(form.isBetterSeller) }}</div>
+                            <label for="product_form_isBetterSeller">Meilleur vente</label>
+                        </div>
+                    </div>
+                     <div class="mb-3">
+                        <label for="">L'images du produit <span class="text-danger">*</span></label>
+                        <div class="text-danger">{{ form_errors(form.imageFile) }}</div>
+                        {{ form_widget(form.imageFile, {'attr': {'class': 'form-control'}})}}
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Description <span class="text-danger">*</span></label>
+                        <div class="text-danger">{{ form_errors(form.description) }}</div>
+                        {{ form_widget(form.description, {'attr': {'class': 'form-control'}})}}
+                    </div>
+                     <div class="mb-3">
+                       <input formnovalidate type="submit" class="btn btn-primary w-100" value="Créer">
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+{% endblock %}

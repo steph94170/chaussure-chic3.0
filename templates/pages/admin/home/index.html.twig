@@ -1,0 +1,11 @@
+{% extends 'themes/base_admin.html.twig' %}
+
+{% block title %} Espace d'administartion{% endblock %}
+
+{% block description %} Espace d'administartion {% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">Espace d'administration</h1>
+
+    <p class="text-center mt-5">Hello {{app.user.firstName}}</p>
+{% endblock %}

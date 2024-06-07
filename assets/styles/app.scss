@@ -1,0 +1,13 @@
+// customize some Bootstrap variables
+// $primary: #db5b1b;
+
+// the ~ allows you to reference things in node_modules
+@import "~bootstrap/scss/bootstrap";
+
+
+// Base
+@import "./base/typography";
+
+
+//Themes
+@import "./themes/base_visitor";
