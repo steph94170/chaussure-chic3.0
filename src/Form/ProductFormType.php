@@ -28,7 +28,18 @@ class ProductFormType extends AbstractType
         ->add('quantity', NumberType::class)
         ->add('isNewArrival',CheckboxType::class)
         ->add('isBetterSeller',CheckboxType::class)
-        ->add('imageFile', VichImageType::class)
+        ->add('imageFile', VichImageType::class, [
+            'required' => false,
+            'allow_delete' => true,
+            'delete_label' => 'Supprimer',
+            'download_uri' => false,
+            'image_uri' => false,
+            'imagine_pattern' => false,
+            'asset_helper' => false,
+        ])
+
+
+
         ->add('category', EntityType::class, [
             'class' => Category::class,
             'choice_label' => 'id',

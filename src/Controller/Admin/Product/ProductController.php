@@ -56,4 +56,50 @@ class ProductController extends AbstractController
             "form" => $form->createView()
         ]);
     }
+
+    #[Route('/product/{id<\d+>}edit', name: 'admin_product_edit', methods :['GET', 'POST'])]
+    public function edit(Product $product, Request $request) :Response
+    {
+        $form = $this->createForm(ProductFormType::class, $product);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+
+            $product->setUpdatedAt(new DateTimeImmutable());
+    
+            $product->setUser($this->getUser());
+
+            $this->em->persist($product);
+            $this->em->Flush();
+            $this->addFlash("success", "le produit a été Modifié avec succès.");
+
+            return $this->redirectToRoute("admin_product_index");
+        }
+
+        return $this->render('pages/admin/product/edit.html.twig', [
+            "form" => $form->createView(),
+            "product" => $product
+ 
+         ]);
+    }
+
+    #[Route('/product/{id<\d+>}delete', name: 'admin_product_delete', methods: ['POST'])]
+    public function delete(Product $product, Request $request) :Response
+    {
+        
+       
+        if ($this->isCsrfTokenValid("delete_product_". $product->getId(), $request->request->get('crsf_token')));
+    
+        {
+            
+            $this->em->remove($product);
+            $this->em->Flush();
+
+            $this->addFlash("success", "Le produit a été supprimé avec succès.");
+        }
+
+        return $this->redirectToRoute("admin_product_index");
+    }
 }

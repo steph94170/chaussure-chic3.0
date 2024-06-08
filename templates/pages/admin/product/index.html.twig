@@ -62,19 +62,19 @@
                         <td>{{ product.quantity }}</td>
                         <td>
                             {% for category in product.category %}
-                                {{ category.name }}
+                                {{category.product}}
                             {% endfor %}
                         </td>
                         <td>{{ product.createdAt|format_date()}}</td>
                         <td>{{ product.updatedAt|format_date()}}</td>
                         <td>
-                            {# <a href="{{ path('admin_product_show', {'id': product.id}) }}" class="btn btn-sm btn-secondary">Les détails</a> 
+                            {# <a href="{{ path('admin_product_show', {'id': product.id}) }}" class="btn btn-sm btn-secondary">Les détails</a>  #}
                             <a href="{{ path('admin_product_edit', {'id': product.id}) }}" class="btn btn-sm btn-secondary">Modifier</a>
                              <form class="d-inline" method="POST" action="{{ path('admin_product_delete', {'id': product.id}) }}">
-                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_method" value="POST">
                                 <input type="hidden" name="csrf_token" value="{{ csrf_token('delete_product_' ~ product.id) }}">
                                 <input type="submit" class="btn btn-sm btn-danger" value="Supprimer" onclick="return confirm('Confirmer la suppression ?')">
-                            </form>   #}
+                            </form>  
                         </td>
                     </tr>
                 {% endfor %}
