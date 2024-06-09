@@ -1,0 +1,44 @@
+{% extends 'themes/base_admin.html.twig' %}
+
+{% block title %} Modifier mon profil {% endblock %}
+
+{% block description %}  Modifier mon profil{% endblock %}
+
+{% block jQuery %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5"> Modifier mon profil </h1>
+
+   {% include 'components/_alert.html.twig' %}
+   
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-mb-8 col-lg-4 mx-auto">
+                    {{form_start(form)}}
+                        <div class="row ">
+                            <div class="mb-3 col-md-6">
+                                <div class="text-danger">{{form_errors(form.firstName)}}</div>
+                                <label for="registration_form_firstName">Prénom </label>
+                                {{form_widget(form.firstName, {'attr' : {'class':'form-control', 'autofocus': 'autofocus'}})}}
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-danger">{{form_errors(form.lastName)}}</div>
+                                <label for="registration_form_LastName">Nom</label>
+                                {{form_widget(form.lastName, {'attr' : {'class':'form-control'}})}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="registration_form_email">Email</label>
+                                 <div class="text-danger">{{form_errors(form.email)}}</div>
+                                {{form_widget(form.email, {'attr' : {'class':'form-control'}})}}
+                            </div>
+                        <div class="mb-3">
+                            <input formnovalidate type="submit" class="btn btn-primary shadow w-100" value="Modifier profil">
+                        </div>
+                    {{form_end(form)}}
+
+                </div>
+            </div>
+        </div>
+{% endblock %}

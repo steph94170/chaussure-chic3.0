@@ -1,0 +1,35 @@
+{% extends 'themes/base_admin.html.twig' %}
+
+{% block title %} Mon profil {% endblock %}
+
+{% block description %}  Mon profil {% endblock %}
+
+{% block jQuery %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5"> Mon profil</h1>
+
+
+   <div class="container my-5">
+       <div class="row">
+            <div class="col-md-8 col-lg-6 mx-auto shadow">
+               {% include 'components/_alert.html.twig' %}
+                <div class="card border-0">
+                  <div class="card-body">
+                    <h2 class="card-title">Mon profil</h2>
+                    <p class="card-text"><strong>Prénom: </strong> {{app.user.firstName}}</p>
+                    <p class="card-text"><strong>Nom: </strong>{{app.user.lastName}}</p>
+                    <p class="card-text"><strong>Email: </strong>{{app.user.email}}</p>
+                    <p class="card-text">
+                        <a href="{{path('admin_profile_edit')}}"class="btn btn-sm btn-secondary">Modifier le Profil</a>
+                        <a href="{{path('admin_profile_edit_password')}}" class="btn btn-sm btn-dark">Modifier le mot de passe</a>
+                    </p>
+                  </div>
+                </div>
+            </div>
+        </div>
+   
+   </div>
+{% endblock %}
