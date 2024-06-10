@@ -18,6 +18,7 @@ class ProfileController extends AbstractController
 {
     public function __construct(
         private EntityManagerInterface $em,
+        //injection de l'encodeur de mot de passe
         private UserPasswordHasherInterface $hasher)
     {
     }
@@ -63,6 +64,8 @@ class ProfileController extends AbstractController
         /** @var User */
         $admin = $this->getUser();
 
+        //pour modifier le mot de passe il faut créer  le type de formulaire correspondant 
+        //les données du formualaire sont envoyées avec la methode PUT
         $form =  $this->createForm(EditPasswordFormType::class, null, [
             "method" => 'PUT'
         ]);
@@ -92,4 +95,5 @@ class ProfileController extends AbstractController
             "form"=> $form->createView()
         ]);
     }
+
 }

@@ -33,6 +33,12 @@ class RegistrationController extends AbstractController
     #[Route('/register', name: 'visitor_registration_register', methods: ['GET', 'POST'])]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
     {
+
+        if ($this->getUser()) 
+        {
+            return $this->redirectToRoute('visitor_welcome_index');
+        }
+        
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
