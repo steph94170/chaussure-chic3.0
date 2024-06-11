@@ -60,6 +60,15 @@ class UserController extends AbstractController
            
             $this->addFlash("success", "le compte de {$user->getFirstName()} {$user->getLastName()} a été supprimé avec succès.");
 
+            //Avant de supprimer le compte, détachons l'utilisateur de tous les produits qu'il a ajouter dans le systeme
+            foreach($user->getProducts() as $product)
+            {
+                $product->setUser(null);
+            }
+
+            
+            $this->container->get('security.token_storage')->setToken(null);
+
             $this->em->remove($user);
             $this->em->Flush();
 

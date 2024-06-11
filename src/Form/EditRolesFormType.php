@@ -17,7 +17,7 @@ class EditRolesFormType extends AbstractType
             ->add('roles', ChoiceType::class, [
                 "choices" => [
                     "Utilisateur"=>"ROLE_USER",
-                    "Administrateur" => "ROLES_ADMIN"
+                    "Administrateur" => "ROLE_ADMIN"
                 ],
                 "expanded"=> false,
                 "multiple"=> true,
