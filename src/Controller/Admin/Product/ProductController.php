@@ -57,7 +57,7 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/product/{id<\d+>}edit', name: 'admin_product_edit', methods :['GET', 'POST'])]
+    #[Route('/product/{id<\d+>}/edit', name: 'admin_product_edit', methods :['GET', 'POST'])]
     public function edit(Product $product, Request $request) :Response
     {
         $form = $this->createForm(ProductFormType::class, $product);
