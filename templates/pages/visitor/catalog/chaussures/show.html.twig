@@ -1,0 +1,37 @@
+{% extends 'themes/base_visitor.html.twig' %}
+
+{% block title %}{{product.name}}{% endblock %}
+
+{% block description %}{{product.name}}{% endblock %}
+
+{% block keywords %} catalog, Chaussure,Sneacker{% endblock %}
+
+{% block main %}
+
+ 
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-2 mt-5">
+                <img src="{{ vich_uploader_asset(product, 'imageFile') }}" class="img-fluid" alt="{{product.name}}">
+            </div>
+            <div class="col-md-10">
+                <h1 class="text-center my-5">{{product.name}}</h1>
+                <p> <strong>Marque</strong>: {{product.brand}}</p>
+                <p><strong>Prix</strong>: {{product.sellingPrice}}€</p>
+                <p>
+                {% if product.quantity > 0 %}
+                  <span class="badge text-bg-success"> Produit disponible</span>
+                {% else %}
+                  <span class="badge text-bg-danger"> stock épuisé</span>
+                {% endif %}
+                </p>
+                <div>
+                    <p> <strong>Description</strong>: {{product.description}}  </p>
+                </div>
+                <a href="" class="btn btn-primary">Ajouter au panier</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

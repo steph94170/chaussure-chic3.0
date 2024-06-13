@@ -23,7 +23,7 @@ class SettingController extends AbstractController
     public function index(SettingRepository $settingRepository): Response
     {
         return $this->render('pages/admin/setting/index.html.twig',[
-            "setting" => $settingRepository->find(2)
+            "setting" => $settingRepository->find(1)
         ]);
     }
 
