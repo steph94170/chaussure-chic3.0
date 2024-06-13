@@ -11,18 +11,24 @@
  <h1 class="text-center"></h1>
     <div class="container d-flex justify-content-center">
         <div class="row">
-            <div class="col text-center">
-                <a href="{{path('visitor_sport_index')}}"><img src="images/sport.jpg" alt="chaussures de sport" class="img-fluid"></a>
-                <p>Sport</p>
-            </div>
-            <div class="col text-center">
+                {% for category in categories %}
+                    <div class="col text-center">
+                        <a href="{{path('visitor_chaussures_index', {'slug' :category.slug })}}"><img src="images/sport.jpg" alt="chaussures de sport" class="img-fluid"></a>
+                        <p>{{ category.name }}</p>
+                    </div>
+
+                {% endfor %}
+            
+
+            {# <div class="col text-center">
                 <a href="{{path('visitor_ville_index')}}"><img src="images/ville.jpg" alt="chaussure de ville" class="img-fluid"></a>
                 <p>Ville</p>
             </div>
             <div class="col text-center">
                 <a href="{{path('visitor_sneacker_index')}}"><img src="images/sneacker.jpg" alt="chaussure sneacker" class="img-fluid"></a>
                 <p>Sneaker</p>
-            </div>
+            </div> #}
+
         </div>
     </div>
 

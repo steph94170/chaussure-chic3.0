@@ -1,0 +1,47 @@
+{% extends 'themes/base_visitor.html.twig' %}
+
+{% block title %}Sneacker{% endblock %}
+
+{% block description %}Sneacker{% endblock %}
+
+{% block keywords %} Chaussure,Sneacker{% endblock %}
+
+{% block main %}
+
+ <h1 class="text-center">Categorie Sneacker</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+        
+            </div>
+            <div class="col-md-10">
+                <div class="row">
+                    {% for row in products|batch(2) %}
+                            {% for product in row %}
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <a class='text-center' href="{{path('visitor_catalog_product_show', {'id':product.id, 'slug':product.slug})}}">
+                                          <img src="{{ vich_uploader_asset(product, 'imageFile') }}" class="img-fluid" alt="{{product.name}}">
+                                        </a>
+                                        <div class="card-body">
+                                         <a class='text-center text-decoration-none text-dark' href="{{path('visitor_catalog_product_show', {'id':product.id, 'slug':product.slug})}}">
+                                            <p class="card-title">{{product.name}}</p>
+                                        </a>
+                                        <p class="card-subtitle mb-2 text-muted ">Marque: {{product.brand}}</p>
+                                        <p class="card-subtitle mb-2 text-muted ">Le prix: {{product.sellingPrice}} €.</p>
+                                        <p class="card-text">
+                                            <a href="" class="btn btn-sm btn-primary">Ajouter au panier</a>
+                                            <a href="{{path('visitor_catalog_product_show', {'id':product.id, 'slug':product.slug})}}" class="btn btn-sm btn-secondary">Voir les details</a>
+                                        </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                    {% endfor %} 
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
