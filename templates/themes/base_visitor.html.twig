@@ -48,10 +48,11 @@
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href="{{path('visitor_welcome_index')}}">Accueil</a>
-                    </li>
-                    <li class="my-3 my-lg-0 mx-lg-3">
-                        <!-- formulaire -->
-                    </li>
+                    </li> 
+                    <!-- formulaire -->
+                    {# <li class="my-3 my-lg-0 mx-lg-3">
+                        {{ render(controller("App\\Controller\\Visitor\\Search\\SearchController::getSearchBar")) }}
+                    </li> #}
                     <!-- panier -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{path('visitor_panier_index')}}"><i class="fas fa-shopping-cart"></i></a>
