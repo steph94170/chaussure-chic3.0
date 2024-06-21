@@ -29,7 +29,7 @@
                 <div>
                     <p> <strong>Description</strong>: {{product.description}}  </p>
                 </div>
-                <a href="" class="btn btn-primary">Ajouter au panier</a>
+                <a href="{{path('visitor_panier_add', {'id': product.id})}}" class="btn btn-primary">Ajouter au panier</a>
             </div>
         </div>
     </div>
