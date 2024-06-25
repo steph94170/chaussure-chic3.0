@@ -12,11 +12,29 @@
     
     <div class="container">
         <div class="row">
-            <div class="col-md-3">
-                formulaire : adresse de livraison
+            <div class="col-md-6">
+                {# formulaire : adresse de livraison #}
+                {{ form_start(form) }}
+                    <div class="mb-3">
+                        <div class="text-danger">{{ form_errors(form.address) }}</div>
+                        {{ form_widget(form.address, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                    <div class="text-danger">{{ form_errors(form.carrier) }}</div>
+                    {{ form_widget(form.carrier, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        <input formnovalidate type="submit" class='btn btn-primary w-100' value="Passer la commande et payer">
+                    </div>
+                {{ form_end(form) }}
             </div>
-            <div class="col-md-9">
-                recap
+            <div class="col-md-6">
+                {% for cartItem in cartItems %}
+
+                    <div class="">
+                        <p>{{cartItem.quantity}} {{cartItem.product.name}} </p>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>

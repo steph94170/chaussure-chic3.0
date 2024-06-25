@@ -92,6 +92,15 @@ class Address
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    public function __toString()
+    {
+        $part1 = $this->getKeyword() ? "{$this->getKeyword()}:" :"";
+        $part2 = "{$this->getFirstName()} {$this->getLastName()} - {$this->getStreet()} {$this->getCity()}
+        {$this->getPostalCode()}, {$this->getCountry()}";
+
+        return "$part1 $part2";
+    }
+
     public function getId(): ?int
     {
         return $this->id;
