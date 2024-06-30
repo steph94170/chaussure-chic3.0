@@ -1,0 +1,71 @@
+{% extends 'themes/base_user.html.twig' %}
+
+{% block title %}Modifier cette commande{% endblock %}
+
+{% block description %}Modifier cette commande{% endblock %}
+
+{% block keywords %} Chaussure,Commande, Produit{% endblock %}
+
+{% block main %}
+
+    <h1 class="text-center">Modifier cette commande</h1>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                {# formulaire : adresse de livraison #}
+                {{ form_start(form) }}
+                    <div class="mb-3">
+                        <label for="">Nom <span='text-danger'>*</span></label>
+                    <div class='text-danger'>{{ form_errors(form.deliveryLastName) }}</div>
+                    {{ form_widget(form.deliveryLastName, {'attr':{'class': 'form-control'} }) }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Prénom <span='text-danger'>*</span></label>
+                        <div class='text-danger'>{{ form_errors(form.deliveryFirstName) }}</div>
+                        {{ form_widget(form.deliveryFirstName, {'attr':{'class': 'form-control'} }) }}
+                    </div>
+                     <div class="mb-3">
+                        <label for="">Email <span='text-danger'>*</span></label>
+                        <div class='text-danger'>{{ form_errors(form.deliveryEmail) }}</div>
+                        {{ form_widget(form.deliveryEmail, {'attr':{'class': 'form-control'} }) }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Numéro de téléphone <span='text-danger'>*</span></label>
+                        <div class='text-danger'>{{ form_errors(form.deliveryPhone) }}</div>
+                        {{ form_widget(form.deliveryPhone, {'attr':{'class': 'form-control'} }) }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Rue <span='text-danger'>*</span></label>
+                        <div class='text-danger'>{{ form_errors(form.deliveryStreet) }}</div>
+                        {{ form_widget(form.deliveryStreet, {'attr':{'class': 'form-control','autofocus':'autofocus'} }) }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Code postal <span='text-danger'>*</span></label>
+                        <div class='text-danger'>{{ form_errors(form.deliveryPostalCode) }}</div>
+                        {{ form_widget(form.deliveryPostalCode, {'attr':{'class': 'form-control'} }) }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Ville <span='text-danger'>*</span></label>
+                        <div class='text-danger'>{{ form_errors(form.deliveryCity) }}</div>
+                        {{ form_widget(form.deliveryCity, {'attr':{'class': 'form-control'} }) }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Pays<span='text-danger'>*</span></label>
+                        <div class='text-danger'>{{ form_errors(form.deliveryCountry) }}</div>
+                        {{ form_widget(form.deliveryCountry, {'attr':{'class': 'form-control'} }) }}
+                    </div>
+                    <div class="mb-3">
+                        <input formnovalidate type="submit" class='btn btn-primary w-100' value="Modifier la commande">
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %} 
+
+
+{# <div class="mb-3">
+                        <div class="text-danger">{{ form_errors(form.carrierName) }}</div>
+                        {{ form_widget(form.carrierName, {'attr': {'class': 'form-control'}}) }}
+                    </div> #}
