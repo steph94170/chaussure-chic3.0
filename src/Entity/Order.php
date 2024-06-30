@@ -6,6 +6,7 @@ use App\Repository\OrderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
@@ -27,27 +28,87 @@ class Order
     #[ORM\Column(length: 255)]
     private ?string $userEmail = null;
 
+    #[Assert\NotBlank(message: "Le prénom est obligatoire.")]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'Le prénom ne doit pas dépasser {{ limit }} caractères.',
+    )]
+    #[Assert\Regex(
+        pattern: "/^[0-9a-zA-Z-_' áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+$/i",
+        match: true,
+        message: 'Le prénom doit contenir uniquement des lettres, des chiffres le tiret du milieu de l\'undescore.',
+    )]
     #[ORM\Column(length: 255)]
     private ?string $deliveryFirstName = null;
 
+    #[Assert\NotBlank(message: "Le nom est obligatoire.")]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'Le nom ne doit pas dépasser {{ limit }} caractères.',
+    )]
+    #[Assert\Regex(
+        pattern: "/^[0-9a-zA-Z-_' áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+$/i",
+        match: true,
+        message: 'Le nom doit contenir uniquement des lettres, des chiffres le tiret du milieu de l\'undescore.',
+    )]
     #[ORM\Column(length: 255)]
     private ?string $deliveryLastName = null;
 
+    #[Assert\Length(
+        max: 180,
+        maxMessage: "L'email ne doit pas dépasser {{ limit }} caractères.",
+    )]
+    #[Assert\Email(
+        message: "L'email {{ value }} n'est pas valide.",
+    )]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $deliveryEmail = null;
 
+    #[Assert\NotBlank(message: "Le numero de téléphone est obligatoire.")]
+    #[Assert\Length(
+        min:6,
+        max: 255,
+        minMessage: 'Le numero de téléphone doit avoir au minimum {{ limit }} caractères.',
+        maxMessage: 'Le numero de téléphone ne doit pas dépasser {{ limit }} caractères.',
+    )]
+    #[Assert\Regex(
+        pattern: "/^[0-9\s\-\+\(\)]{6,255}$/",
+        match: true,
+        message: "Le numero de téléphone n'est pas valide.",
+    )]
     #[ORM\Column(length: 255)]
     private ?string $deliveryPhone = null;
 
+    #[Assert\NotBlank(message: "Le nom de la rue est obligatoire.")]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: "Le nom de la rue ne doit pas dépasser {{ limit }} caractères.",
+    )]
     #[ORM\Column(length: 255)]
     private ?string $deliveryStreet = null;
 
+    #[Assert\Regex(
+        pattern: "/^\d{1,10}$/",
+        match: true,
+        message: "Le code postal doit être un nombre compris entre 1 et 10 chiffres."
+    )]
     #[ORM\Column(length: 255)]
     private ?string $deliveryPostalCode = null;
 
+    #[Assert\NotBlank(message: "La ville est obligatoire.")]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'Le nom de la ville ne doit pas dépasser {{ limit }} caractères.'
+    )]
     #[ORM\Column(length: 255)]
     private ?string $deliveryCity = null;
 
+    #[Assert\NotBlank(message: "Le pays est obligatoire.")]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'Le nom du pays ne doit pas dépasser {{ limit }} caractères.'
+    )]
+    #[Assert\Country(message: "Ce pays est inconnu.")]
     #[ORM\Column(length: 255)]
     private ?string $deliveryCountry = null;
 
@@ -69,6 +130,11 @@ class Order
     #[ORM\OneToMany(targetEntity: OrderItem::class, mappedBy: 'theOrder', orphanRemoval: true)]
     private Collection $yes;
 
+    #[Assert\NotBlank(message: "Le nom du livreur est obligatoire.")]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'Le nom du livreur ne doit pas dépasser {{ limit }} caractères.',
+    )]
     #[ORM\Column(length: 255)]
     private ?string $carrierName = null;
 
@@ -99,7 +165,7 @@ class Order
         return $this->userEmail;
     }
 
-    public function setUserEmail(string $userEmail): static
+    public function setUserEmail(?string $userEmail): static
     {
         $this->userEmail = $userEmail;
 
@@ -111,7 +177,7 @@ class Order
         return $this->deliveryFirstName;
     }
 
-    public function setDeliveryFirstName(string $deliveryFirstName): static
+    public function setDeliveryFirstName(?string $deliveryFirstName): static
     {
         $this->deliveryFirstName = $deliveryFirstName;
 
@@ -123,7 +189,7 @@ class Order
         return $this->deliveryLastName;
     }
 
-    public function setDeliveryLastName(string $deliveryLastName): static
+    public function setDeliveryLastName(?string $deliveryLastName): static
     {
         $this->deliveryLastName = $deliveryLastName;
 
@@ -147,7 +213,7 @@ class Order
         return $this->deliveryPhone;
     }
 
-    public function setDeliveryPhone(string $deliveryPhone): static
+    public function setDeliveryPhone(?string $deliveryPhone): static
     {
         $this->deliveryPhone = $deliveryPhone;
 
@@ -159,7 +225,7 @@ class Order
         return $this->deliveryStreet;
     }
 
-    public function setDeliveryStreet(string $deliveryStreet): static
+    public function setDeliveryStreet(?string $deliveryStreet): static
     {
         $this->deliveryStreet = $deliveryStreet;
 
@@ -171,19 +237,20 @@ class Order
         return $this->deliveryPostalCode;
     }
 
-    public function setDeliveryPostalCode(string $deliveryPostalCode): static
+    public function setDeliveryPostalCode(?string $deliveryPostalCode): static
     {
         $this->deliveryPostalCode = $deliveryPostalCode;
 
         return $this;
     }
 
-    public function getDeliveryCity(): ?string
+    public function getDeliveryCity
+    (): ?string
     {
         return $this->deliveryCity;
     }
 
-    public function setDeliveryCity(string $deliveryCity): static
+    public function setDeliveryCity(?string $deliveryCity): static
     {
         $this->deliveryCity = $deliveryCity;
 
@@ -195,7 +262,7 @@ class Order
         return $this->deliveryCountry;
     }
 
-    public function setDeliveryCountry(string $deliveryCountry): static
+    public function setDeliveryCountry(?string $deliveryCountry): static
     {
         $this->deliveryCountry = $deliveryCountry;
 
@@ -207,7 +274,7 @@ class Order
         return $this->totalAmount;
     }
 
-    public function setTotalAmount(float $totalAmount): static
+    public function setTotalAmount(?float $totalAmount): static
     {
         $this->totalAmount = $totalAmount;
 
@@ -219,7 +286,7 @@ class Order
         return $this->status;
     }
 
-    public function setStatus(string $status): static
+    public function setStatus(?string $status): static
     {
         $this->status = $status;
 
@@ -231,7 +298,7 @@ class Order
         return $this->orderedAt;
     }
 
-    public function setOrderedAt(\DateTimeImmutable $orderedAt): static
+    public function setOrderedAt(?\DateTimeImmutable $orderedAt): static
     {
         $this->orderedAt = $orderedAt;
 
@@ -285,7 +352,7 @@ class Order
         return $this->carrierName;
     }
 
-    public function setCarrierName(string $carrierName): static
+    public function setCarrierName(?string $carrierName): static
     {
         $this->carrierName = $carrierName;
 
